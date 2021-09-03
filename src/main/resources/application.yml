@@ -1,7 +1,46 @@
 server:
   port: 8081
+
+
 spring:
   application:
     name: message-produser
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/mq_producer
+    username: postgres
+    password: test123
+  jpa:
+    database: POSTGRESQL
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create-drop
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
   rabbitmq:
     addresses: localhost:5672
+
+
+logging:
+  file:
+    name: logs/Producer-log.txt
+
+
+management:
+  endpoint:
+    refresh:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: info,health
+
+
+info:
+  app:
+    name: microservice application
+    description: producer service
+    version: 0.0.1
