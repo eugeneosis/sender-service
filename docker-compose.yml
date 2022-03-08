@@ -1,0 +1,21 @@
+version: '3.3'
+services:
+  produser:
+    container_name: rabbit-produser
+    build: ./
+    environment:
+      - DB_URL=postgres
+      - DB_USER=user
+      - DB_PASSWORD=service_password
+    ports:
+      - "8081:8081"
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:9.4
+    environment:
+      - POSTGRES_USER=app_user
+      - POSTGRES_PASSWORD=service_password
+      - POSTGRES_DB=mq_producer
+    ports:
+      - 5432:5432

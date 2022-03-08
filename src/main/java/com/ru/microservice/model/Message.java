@@ -1,13 +1,19 @@
 package com.ru.microservice.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 import lombok.*;
-import lombok.experimental.FieldDefaults;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.sql.Timestamp;
-
-import static java.time.LocalDateTime.now;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "Messages")
@@ -16,18 +22,27 @@ import static java.time.LocalDateTime.now;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
 public class Message implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    Integer id;
+    private Integer id;
 
-    @Column(name = "message", unique = true)
-    String message;
+    @Column(name = "message", nullable = false)
+    @Size(min = 3, message = "The message must be at least 3 characters")
+    private String message;
 
     @Column(name = "date")
     @Builder.Default
-    Timestamp dateTime = Timestamp.valueOf(now());
+    @JsonSerialize(using = LocalDateSerializer.class)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    private LocalDate createdDateAt = LocalDate.now();
+
+    @Column(name = "time")
+    @Builder.Default
+    @DateTimeFormat(pattern = "HH:mm:ss")
+    @JsonSerialize(using = LocalTimeSerializer.class)
+    @JsonDeserialize(using = LocalTimeDeserializer.class)
+    private LocalTime createdTimeAt = LocalTime.now();
 }

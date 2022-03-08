@@ -4,17 +4,20 @@ server:
 
 spring:
   application:
-    name: message-produser
+    name: sender-service
   datasource:
     driverClassName: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/mq_producer
     username: postgres
     password: test123
+    #url: jdbc:postgresql://${DB_URL}:5432/mq_producer
+    #    username: ${DB_USER}
+    #    password: ${DB_PASSWORD}
   jpa:
     database: POSTGRESQL
     generate-ddl: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     open-in-view: false
     properties:
       hibernate:
@@ -26,7 +29,7 @@ spring:
 
 logging:
   file:
-    name: logs/Producer-log.txt
+    name: logs/Sender-log.txt
 
 
 management:
@@ -42,5 +45,5 @@ management:
 info:
   app:
     name: microservice application
-    description: producer service
-    version: 0.0.1
+    description: sender service
+    version: 1.0.0

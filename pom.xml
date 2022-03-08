@@ -10,13 +10,20 @@
     </parent>
 
     <groupId>com.ru.microservice</groupId>
-    <artifactId>education-rabbit-producer</artifactId>
-    <version>0.0.1</version>
-    <name>education-rabbit-producer</name>
-    <description>education-rabbitmq</description>
+    <artifactId>sender-service</artifactId>
+    <version>1.0.0</version>
+    <name>sender-service</name>
+    <description>sender-service</description>
 
     <properties>
         <java.version>1.8</java.version>
+        <log4j2.version>2.17.1</log4j2.version>
+        <!--Error creating converter for xwEx java.lang.reflect.InvocationTargetException-->
+        <!--ERROR Unrecognized conversion specifier [xwEx] starting at position 161 in conversion pattern.-->
+        <!--org.apache.logging.log4j:log4j-core:jar:2.7:compile-->
+        <!--System.setProperty("LOG_EXCEPTION_CONVERSION_WORD", "");-->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
     <dependencies>
@@ -46,11 +53,14 @@
             <artifactId>hibernate-validator</artifactId>
             <version>6.1.6.Final</version>
         </dependency>
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

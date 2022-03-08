@@ -1,33 +1,15 @@
 package com.ru.microservice.service;
 
 import com.ru.microservice.model.Message;
-import com.ru.microservice.repository.MessageRepository;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.List;
 
-import static java.time.LocalDateTime.now;
+public interface MessageService {
 
-@Service
-@RequiredArgsConstructor
-@Slf4j
-public class MessageService {
+    Message save(Message message);
 
-    private final MessageRepository messageRepository;
+    List<Message> getAll();
 
-    @Transactional
-    public Message save(Message message) {
-        message.setDateTime(Timestamp.valueOf(now()));
-        log.info("Saved new message: {}", message);
-        return messageRepository.save(message);
-    }
-
-    public List<Message> findAll() {
-        log.info("Get all messages");
-        return messageRepository.findAll();
-    }
+    List<Message> findByDate(LocalDate date);
 }
