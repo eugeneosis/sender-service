@@ -23,7 +23,9 @@ public class MessageController {
     private final RabbitTemplate template;
 
     private static final String API_MESSAGES = "/messages";
-    private static final String API_BY_DATE = "/by-date";
+    private static final String API_DATE = "/date";
+    private static final String API_TEST_DATE = "/test-date";
+    private static final String API_SORT_BY_DATE_TIME = "/date-time";
 
     private static final String MESSAGE_EXCEPTION = "Message must not be empty";
 
@@ -43,10 +45,22 @@ public class MessageController {
         return ResponseEntity.ok(messageServiceImpl.getAll());
     }
 
-    @GetMapping(API_BY_DATE)
-    public ResponseEntity<List<Message>> getMessagesByDate(LocalDate date) {
+    @GetMapping(API_DATE)
+    public ResponseEntity<List<Message>> getMessagesByDate(LocalDate createdDate) {
         log.info("Fetching messages by date");
-        return ResponseEntity.ok(messageServiceImpl.findByDate(date));
+        return ResponseEntity.ok(messageServiceImpl.findByDate(createdDate));
+    }
+
+    @GetMapping(API_TEST_DATE)
+    public ResponseEntity<List<Message>> getMessageByDate(LocalDate createdDate) {
+        log.info("Fetching sort messages by date");
+        return ResponseEntity.ok(messageServiceImpl.findMessagesByCreatedDate(createdDate));
+    }
+
+    @GetMapping(API_SORT_BY_DATE_TIME)
+    public ResponseEntity<List<Message>> getMessageByDateAndTime(LocalDate createdDate, LocalDate createdTime) {
+        log.info("Fetching messages by date and time");
+        return ResponseEntity.ok(messageServiceImpl.findMessagesByCreatedDateAndCreatedTime(createdDate, createdTime));
     }
 
     private void validateMessage(Message message) {

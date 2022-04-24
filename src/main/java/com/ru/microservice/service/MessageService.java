@@ -11,5 +11,9 @@ public interface MessageService {
 
     List<Message> getAll();
 
-    List<Message> findByDate(LocalDate date);
+    List<Message> findByDate(LocalDate createdDate);
+
+    List<Message> findMessagesByCreatedDate(LocalDate createdDate);
+
+    List<Message> findMessagesByCreatedDateAndCreatedTime(LocalDate createdDate, LocalDate createdTime);
 }

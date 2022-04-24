@@ -21,8 +21,8 @@ public class MessageServiceImpl implements MessageService {
     @Override
     @Transactional
     public Message save(Message message) {
-        message.setCreatedDateAt(LocalDateTime.now().toLocalDate());
-        message.setCreatedTimeAt(LocalDateTime.now().toLocalTime());
+        message.setCreatedDate(LocalDateTime.now().toLocalDate());
+        message.setCreatedTime(LocalDateTime.now().toLocalTime());
         log.info("Saved new message: {}", message.getMessage());
         return messageRepository.save(message);
     }
@@ -34,7 +34,17 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
-    public List<Message> findByDate(LocalDate date) {
-        return messageRepository.findAllByCreatedDateAt(date);
+    public List<Message> findByDate(LocalDate createdDate) {
+        return messageRepository.findAllMessagesByCreatedDate(createdDate);
+    }
+
+    @Override
+    public List<Message> findMessagesByCreatedDate(LocalDate date) {
+        return messageRepository.findMessagesByCreatedDate(date);
+    }
+
+    @Override
+    public List<Message> findMessagesByCreatedDateAndCreatedTime(LocalDate createdDate, LocalDate createdTime) {
+        return messageRepository.findMessagesByCreatedDateAndCreatedTime(createdDate, createdTime);
     }
 }

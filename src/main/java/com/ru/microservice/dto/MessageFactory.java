@@ -9,8 +9,8 @@ public class MessageFactory {
         return Message.builder()
                 .id(message.getId())
                 .message(message.getMessage())
-                .date(message.getCreatedDateAt())
-                .time(message.getCreatedTimeAt())
+                .date(message.getCreatedDate())
+                .time(message.getCreatedTime())
                 .build();
     }
 }

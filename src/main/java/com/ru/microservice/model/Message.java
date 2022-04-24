@@ -30,19 +30,19 @@ public class Message implements Serializable {
     private Integer id;
 
     @Column(name = "message", nullable = false)
-    @Size(min = 3, message = "The message must be at least 3 characters")
+    @Size(min = 3, message = "Message must be at least 3 characters")
     private String message;
 
     @Column(name = "date")
     @Builder.Default
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
-    private LocalDate createdDateAt = LocalDate.now();
+    private LocalDate createdDate = LocalDate.now();
 
     @Column(name = "time")
     @Builder.Default
     @DateTimeFormat(pattern = "HH:mm:ss")
     @JsonSerialize(using = LocalTimeSerializer.class)
     @JsonDeserialize(using = LocalTimeDeserializer.class)
-    private LocalTime createdTimeAt = LocalTime.now();
+    private LocalTime createdTime = LocalTime.now();
 }
