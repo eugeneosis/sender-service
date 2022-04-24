@@ -17,11 +17,6 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <log4j2.version>2.17.1</log4j2.version>
-        <!--Error creating converter for xwEx java.lang.reflect.InvocationTargetException-->
-        <!--ERROR Unrecognized conversion specifier [xwEx] starting at position 161 in conversion pattern.-->
-        <!--org.apache.logging.log4j:log4j-core:jar:2.7:compile-->
-        <!--System.setProperty("LOG_EXCEPTION_CONVERSION_WORD", "");-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
@@ -52,6 +47,11 @@
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>6.1.6.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.6.6</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
