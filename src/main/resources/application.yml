@@ -10,9 +10,6 @@ spring:
     url: jdbc:postgresql://localhost:5432/mq_producer
     username: postgres
     password: password
-    #url: jdbc:postgresql://${DB_URL}:5432/mq_producer
-    #    username: ${DB_USER}
-    #    password: ${DB_PASSWORD}
   jpa:
     database: POSTGRESQL
     generate-ddl: true

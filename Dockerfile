@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk8
-ADD target/education-rabbit-producer-0.0.1.jar producer.jar
-ENTRYPOINT ["java","-jar","producer.jar"]
+FROM bellsoft/liberica-openjdk-alpine-musl
+COPY ./target/sender-service-1.0.0.jar .
+CMD ["java","-jar","sender-service-1.0.0.jar"]
 
